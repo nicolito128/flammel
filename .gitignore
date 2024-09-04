@@ -1,0 +1,16 @@
+# Environment
+*.env
+!*.env.example
+
+# Secrets
+secrets
+
+# Build
+dist
+node_modules
+
+# Logs
+npm-debug.log
+
+# IDE
+.vscode

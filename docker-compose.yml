@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  bot:
+    container_name: flammel-discord-bot
+    build:
+      context: .
+    environment:
+      - BOT_TOKEN=$BOT_TOKEN
+      - APPLICATION_ID=$APPLICATION_ID
+      - DEBUG_MODE=production

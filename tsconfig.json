@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+		"module": "NodeNext",
+		"target": "ESNext",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        /* Type Checking */
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+        "noErrorTruncation": true,
+		"stripInternal": true,
+    },
+	"exclude": [
+		"dist",
+		"node_modules",
+		"tests",
+	],
+    "include": [
+        "src",
+    ],
+}

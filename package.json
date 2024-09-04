@@ -1,0 +1,33 @@
+{
+  "name": "flammel-bot",
+  "version": "0.1.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "start:dev": "npm run build && node dist/index.js",
+    "build": "npm run build:clean && tsc --project tsconfig.json",
+    "build:clean": "rimraf dist; exit 0",
+    "fmt": "ts-standard --fix && standard --fix"
+  },
+  "author": "Nicolas A. Serna",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@plotex/render-image": "^1.0.21",
+    "plot": "1.0.22",
+    "seyfert": "2.0.0"
+  },
+  "devDependencies": {
+    "standard": "^17.1.0",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.5.4"
+  },
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "dist",
+      "src/**/*.js"
+    ]
+  }
+}
