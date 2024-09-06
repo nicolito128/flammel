@@ -1,6 +1,6 @@
 import { Declare, Command, Options } from 'seyfert';
-import SineCommand from './sine.command';
-import CosineCommand from './cosine.command';
+import SineCommand from './math.sine';
+import CosineCommand from './math.cosine';
 
 @Declare({
   name: 'math',

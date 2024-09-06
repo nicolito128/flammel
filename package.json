@@ -7,7 +7,7 @@
     "start:env": "npm run build && node --env-file .env dist/index.js",
     "start:dev": "npm run build && node dist/index.js",
     "build": "npm run clean && tsc --project tsconfig.json",
-    "clean": "rimraf dist; exit 0",
+    "clean": "rimraf -I dist",
     "fmt": "ts-standard --fix && standard --fix"
   },
   "author": "Nicolas A. Serna",
