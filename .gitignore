@@ -1,9 +1,6 @@
 # Environment
-*.env
-!*.env.example
-
-# Secrets
-secrets
+*.env*
+!*.env*.example
 
 # Build
 dist
@@ -11,6 +8,10 @@ node_modules
 
 # Logs
 npm-debug.log
+
+# Secrets
+BOT_TOKEN
+APPLICATION_ID
 
 # IDE
 .vscode

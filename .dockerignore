@@ -6,7 +6,4 @@ dist
 npm-debug.log
 
 # Environment
-.env
-
-# Secrets
-secrets
+*.env*
