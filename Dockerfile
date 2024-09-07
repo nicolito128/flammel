@@ -1,12 +1,6 @@
 # Base block
 FROM node:20.17.0-alpine3.20 AS base
 
-RUN \
-    --mount=type=secret,id=BOT_TOKEN \
-    --mount=type=secret,id=APPLICATION_ID \
-        BOT_TOKEN=$(cat /run/secrets/BOT_TOKEN) \
-        APPLICATION_ID=$(cat /run/secrets/APPLICATION_ID)
-
 ENV DIR /app
 WORKDIR $DIR
 
