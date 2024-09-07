@@ -5,7 +5,12 @@ services:
     container_name: flammel-discord-bot
     build:
       context: .
-    environment:
-      - BOT_TOKEN=$BOT_TOKEN
-      - APPLICATION_ID=$APPLICATION_ID
-      - DEBUG_MODE=production
+    secrets:
+      - "BOT_TOKEN"
+      - "APPLICATION_ID"
+
+secrets:
+  BOT_TOKEN:
+    file: ./BOT_TOKEN.txt
+  APPLICATION_ID:
+    file: ./APPLICATION_ID.txt

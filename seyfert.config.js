@@ -1,5 +1,5 @@
-import { config } from 'seyfert'
-import * as fs from 'node:fs'
+const fs = require('node:fs')
+const { config } = require('seyfert')
 
 const getBotToken = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -17,7 +17,7 @@ const getApplicationId = () => {
   }
 }
 
-export default config.bot({
+module.exports = config.bot({
   applicationId: getApplicationId(),
   token: getBotToken(),
   debug: process.env.NODE_ENV === 'development',

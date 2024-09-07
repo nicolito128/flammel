@@ -1,6 +1,12 @@
 # Base block
 FROM node:20.17.0-alpine3.20 AS base
 
+RUN \
+    --mount=type=secret,id=BOT_TOKEN \
+    --mount=type=secret,id=APPLICATION_ID \
+        BOT_TOKEN=$(cat /run/secrets/BOT_TOKEN) \
+        APPLICATION_ID=$(cat /run/secrets/APPLICATION_ID)
+
 ENV DIR /app
 WORKDIR $DIR
 
@@ -29,12 +35,6 @@ COPY --from=build $DIR/node_modules $DIR/node_modules
 COPY --from=build $DIR/dist $DIR/dist
 COPY --from=build $DIR/package.json $DIR/package.json
 COPY --from=build $DIR/seyfert.config.js $DIR/seyfert.config.js
-
-RUN \
-    --mount=type=secret,id=BOT_TOKEN \
-    --mount=type=secret,id=APPLICATION_ID \
-        BOT_TOKEN=$(cat /run/secrets/BOT_TOKEN) \
-        APPLICATION_ID=$(cat /run/secrets/APPLICATION_ID)
 
 ENV USER node
 ENV NODE_ENV=production
