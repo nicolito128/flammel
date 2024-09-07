@@ -31,7 +31,7 @@ COPY --from=build $DIR/package.json $DIR/package.json
 COPY --from=build $DIR/seyfert.config.js $DIR/seyfert.config.js
 
 ENV USER node
-ENV NODE_ENV=production
+ENV NODE_ENV production
 
 # Restricts user permissions
 USER $USER
