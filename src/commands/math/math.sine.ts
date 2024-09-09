@@ -10,8 +10,8 @@ import { MessageFlags } from 'seyfert/lib/types/index.js'
 import * as math from 'mathjs'
 
 const options = {
-  value: createNumberOption({
-    description: 'Value of the function',
+  x: createNumberOption({
+    description: 'Input value of the function in radians',
     required: true
   }),
   hide: createBooleanOption({
@@ -26,17 +26,15 @@ const options = {
 @Options(options)
 export default class SineCommand extends SubCommand {
   async run (ctx: CommandContext<typeof options>): Promise<void> {
+    // Optionals
     const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined
-    const { value } = ctx.options
-    const result = this.sin(value)
 
-    await ctx.write({
-      content: `\`sin(${value}) = ${result}\``,
+    const x = ctx.options.x
+    const sinX = math.sin(x)
+
+    ctx.write({
+      content: `\`sin(${x} rad) = ${sinX} rad\``,
       flags
     })
-  }
-
-  sin (x: number): number {
-    return math.sin(x)
   }
 }

@@ -1,10 +1,8 @@
-import { Declare, Command, Options } from 'seyfert';
-import SineCommand from './math.sine';
-import CosineCommand from './math.cosine';
+import { AutoLoad, Declare, Command } from 'seyfert'
 
 @Declare({
   name: 'math',
   description: 'Math command'
 })
-@Options([SineCommand, CosineCommand])
+@AutoLoad()
 export default class MathCommand extends Command {}
