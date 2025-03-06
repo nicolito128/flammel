@@ -5,7 +5,7 @@ import {
   createBooleanOption,
   type CommandContext
 } from 'seyfert'
-import { MessageFlags } from 'seyfert/lib/types/index.js'
+import { MessageFlags } from 'seyfert/lib/types'
 
 const options = {
   hide: createBooleanOption({

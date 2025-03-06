@@ -4,8 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "start:env": "npm run build && node --env-file .env dist/index.js",
-    "start:dev": "npm run build && node dist/index.js",
+    "dev": "npm run build && node --env-file .env  dist/index.js",
     "build": "npm run clean && tsc --project tsconfig.json",
     "clean": "rimraf -I dist",
     "fmt": "ts-standard --fix && standard --fix"
@@ -14,10 +13,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@plotex/render-image": "^1.0.21",
-    "mathjs": "^13.1.1",
-    "plot": "1.0.22",
-    "seyfert": "2.0.0"
+    "seyfert": "2.2.0"
   },
   "devDependencies": {
     "rimraf": "^6.0.1",

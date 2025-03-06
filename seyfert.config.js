@@ -23,8 +23,7 @@ module.exports = config.bot({
   debug: process.env.NODE_ENV === 'development',
   intents: ['Guilds', 'MessageContent'],
   locations: {
-    base: 'src',
-    output: 'dist',
+    base: 'dist',
     commands: 'commands',
     events: 'events'
   }
