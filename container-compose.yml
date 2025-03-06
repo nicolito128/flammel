@@ -3,6 +3,7 @@ services:
     container_name: flammel-discord-bot
     build:
       context: .
+      dockerfile: ./Containerfile
     secrets:
       - "BOT_TOKEN"
       - "APPLICATION_ID"
