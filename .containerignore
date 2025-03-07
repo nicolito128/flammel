@@ -9,5 +9,4 @@ npm-debug.log
 *.env*
 
 # Secrets
-*APPLICATION_ID*
-*BOT_TOKEN*
+secrets

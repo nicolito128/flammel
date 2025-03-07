@@ -5,11 +5,11 @@ services:
       context: .
       dockerfile: ./Containerfile
     secrets:
-      - BOT_TOKEN
-      - APPLICATION_ID
+      - bot_token
+      - application_id
 
 secrets:
-  BOT_TOKEN:
-    file: ./BOT_TOKEN
-  APPLICATION_ID:
-    file: ./APPLICATION_ID
+  bot_token:
+    file: ./secrets/bot_token
+  application_id:
+    file: ./secrets/application_id

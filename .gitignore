@@ -10,8 +10,7 @@ node_modules
 npm-debug.log
 
 # Secrets
-*BOT_TOKEN*
-*APPLICATION_ID*
+secrets
 
 # IDE
 .vscode
