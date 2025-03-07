@@ -10,11 +10,7 @@ const getBotToken = () => {
 }
 
 const getApplicationId = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return fs.readFileSync('/run/secrets/application_id', 'utf8').trim()
-  } else {
-    return process.env.APPLICATION_ID ?? ''
-  }
+  return process.env.APPLICATION_ID ?? ''
 }
 
 module.exports = config.bot({

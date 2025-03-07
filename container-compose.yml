@@ -4,12 +4,12 @@ services:
     build:
       context: .
       dockerfile: ./Containerfile
+    env_file:
+      - path: ./.env
+        required: false
     secrets:
       - bot_token
-      - application_id
 
 secrets:
   bot_token:
     file: ./secrets/bot_token
-  application_id:
-    file: ./secrets/application_id
