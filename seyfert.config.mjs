@@ -1,5 +1,5 @@
-const fs = require('node:fs')
-const { config } = require('seyfert')
+import * as fs from 'node:fs'
+import { config } from 'seyfert'
 
 const getBotToken = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -9,12 +9,12 @@ const getBotToken = () => {
   }
 }
 
-const getApplicationId = () => {
-  return process.env.APPLICATION_ID ?? ''
-}
+const getApplicationID = () => process.env.APPLICATION_ID ?? ''
 
-module.exports = config.bot({
-  applicationId: getApplicationId(),
+const getPort = () => parseInt(process.env.PORT) ?? 5000
+
+export default config.bot({
+  applicationId: getApplicationID(),
   token: getBotToken(),
   debug: process.env.NODE_ENV === 'development',
   intents: ['Guilds', 'MessageContent'],
@@ -22,5 +22,6 @@ module.exports = config.bot({
     base: 'dist',
     commands: 'commands',
     events: 'events'
-  }
+  },
+  port: getPort()
 })

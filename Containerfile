@@ -19,7 +19,7 @@ RUN npm prune --production
 RUN npm i -g typescript
 
 COPY tsconfig.json ./
-COPY seyfert.config.js ./
+COPY seyfert.config.mjs ./
 COPY /src ./src
 
 ## Build typescript
@@ -36,7 +36,7 @@ COPY --from=build $DIR/node_modules ./node_modules
 ## Builder
 COPY --from=build $DIR/dist ./dist
 COPY --from=build $DIR/package.json ./package.json
-COPY --from=build $DIR/seyfert.config.js ./seyfert.config.js
+COPY --from=build $DIR/seyfert.config.mjs ./seyfert.config.mjs
 
 # Environment permissions
 ENV NODE_ENV production

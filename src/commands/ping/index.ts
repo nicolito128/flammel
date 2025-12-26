@@ -19,7 +19,7 @@ const options = {
 })
 @Options(options)
 export default class PingCommand extends Command {
-  async run (ctx: CommandContext<typeof options>): Promise<void> {
+  async run(ctx: CommandContext<typeof options>): Promise<void> {
     const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined
     const ping = ctx.client.gateway.latency
 
