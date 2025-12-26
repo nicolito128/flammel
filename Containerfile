@@ -17,6 +17,7 @@ COPY package*.json ./
 RUN npm ci
 RUN npm prune --production
 RUN npm i -g typescript
+RUN npm i @types/node
 
 COPY tsconfig.json ./
 COPY seyfert.config.mjs ./
