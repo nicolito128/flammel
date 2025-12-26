@@ -7,8 +7,12 @@ services:
     env_file:
       - path: ./.env
         required: false
+    environment:
+      NODE_ENV: production
     secrets:
       - bot_token
+    volumes:
+      - ./seyfert-logs:/seyfert-logs
 
 secrets:
   bot_token:

@@ -19,7 +19,7 @@
         "noErrorTruncation": true,
         "outDir": "./dist",
         "rootDir": "./src",
-        "baseUrl": ".",
+        "baseUrl": "./",
         "stripInternal": true
     },
     "exclude": [

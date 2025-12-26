@@ -4,13 +4,14 @@
 
 # Build
 dist
-node_modules
+node_modules/
 
 # Logs
+seyfert-logs/
 npm-debug.log
 
 # Secrets
-secrets
+secrets/
 
 # IDE
 .vscode

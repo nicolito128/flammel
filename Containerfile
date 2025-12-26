@@ -1,7 +1,7 @@
 # [ base ] #
 FROM node:lts-alpine AS base
 
-ENV DIR /app
+ENV DIR /flammel
 WORKDIR $DIR
 
 # [ OS packages ] #
