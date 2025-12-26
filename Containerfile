@@ -1,7 +1,7 @@
 # [ base ] #
 FROM node:lts-alpine AS base
 
-ENV DIR /flammel
+ENV DIR=/flammel
 WORKDIR $DIR
 
 # [ OS packages ] #
@@ -15,7 +15,7 @@ FROM base AS build
 COPY package*.json ./
 
 RUN npm ci
-RUN npm prune --production
+RUN npm prune --omit=dev
 RUN npm i -g typescript
 RUN npm i @types/node
 
@@ -40,9 +40,9 @@ COPY --from=build $DIR/package.json ./package.json
 COPY --from=build $DIR/seyfert.config.mjs ./seyfert.config.mjs
 
 # Environment permissions
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ## Remove if your project needs root permissions
-ENV USER node
+ENV USER=node
 USER $USER
 
 # Run the application
