@@ -54,7 +54,13 @@ export default class RollCommand extends Command {
             results.push(value);
         }
 
-        let content = `**Roll**: ${n}d${sides} (Total: ${total})\n`;
+        let content = `**Roll**: ${n}d${sides}`;
+
+        if (n > 1) {
+            content += ` (Total: ${total})`;
+        }
+
+        content += '\n';
         content += results.map(v => `:game_die: ${v}`).join(' ');
 
         await ctx.write({
