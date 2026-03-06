@@ -13,13 +13,13 @@ const MAX_LIMIT = 100;
 
 const options = {
     n: createNumberOption({
-        description: 'Number of dice to roll',
+        description: 'Quantity of dice to roll',
         required: true,
         min_value: MIN_LIMIT,
         max_value: MAX_LIMIT
     }),
     sides: createNumberOption({
-        description: 'Number of sides on the dice',
+        description: 'Number of sides per die',
         required: true,
         min_value: MIN_LIMIT,
         max_value: MAX_LIMIT
@@ -31,7 +31,7 @@ const options = {
 
 @Declare({
     name: 'roll',
-    description: 'Roll N number of dice and M sides on the dice'
+    description: 'Roll N dice with M sides each'
 })
 @Options(options)
 export default class RollCommand extends Command {
@@ -46,14 +46,16 @@ export default class RollCommand extends Command {
         }
 
         const results = [];
+        let total = 0;
+
         for (let i = 0; i < n; i++) {
-            results.push(this.roll(sides));
+            const value = this.roll(sides);
+            total += value;
+            results.push(value);
         }
 
-        let content = `**Roll**: ${n}d${sides}\n`;
-        results.forEach((v) => {
-            content += `:game_die: ${v}  `;
-        });
+        let content = `**Roll**: ${n}d${sides} (Total: ${total})\n`;
+        content += results.map(v => `:game_die: ${v}`).join(' ');
 
         await ctx.write({
             content,
