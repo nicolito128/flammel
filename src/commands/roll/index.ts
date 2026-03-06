@@ -93,7 +93,7 @@ export default class RollCommand extends Command {
 
         if (circumstances) {
             let elem: number;
-            if (circumstances === 'Advantage') {
+            if (circumstances === 'advantage') {
                 elem = Math.max(...rollValues);
                 fields.push({ name: 'Advantage', value: `\`${elem}\`` });
             } else {
