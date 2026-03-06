@@ -4,12 +4,30 @@ import {
     Options,
     createBooleanOption,
     createNumberOption,
-    type CommandContext
+    createStringOption,
+    Embed,
+    type CommandContext,
 } from 'seyfert'
-import { MessageFlags } from 'seyfert/lib/types'
+import { MessageFlags, APIEmbedField } from 'seyfert/lib/types'
+
+const EMBED_COLOR = '#DC143C';
 
 const MIN_LIMIT = 1;
 const MAX_LIMIT = 100;
+
+const ATTRIBUTES_CHOICES = [
+    { name: 'Strength', value: 'strenth' },
+    { name: 'Dexterity', value: 'dexterity' },
+    { name: 'Constitution', value: 'constitution' },
+    { name: 'Intelligence', value: 'intelligence' },
+    { name: 'Wisdom', value: 'wisdom' },
+    { name: 'Charisma', value: 'charisma' },
+];
+
+const CIRCUMSTANCES_CHOICES = [
+    { name: 'Advantage', value: 'advantage' },
+    { name: 'Disadvantage', value: 'disadvantage' },
+];
 
 const options = {
     n: createNumberOption({
@@ -24,6 +42,14 @@ const options = {
         min_value: MIN_LIMIT,
         max_value: MAX_LIMIT
     }),
+    attribute: createStringOption({
+        description: 'D&D ability type',
+        choices: ATTRIBUTES_CHOICES
+    }),
+    circumstances: createStringOption({
+        description: 'Reflects the roll circumstances',
+        choices: CIRCUMSTANCES_CHOICES
+    }),
     hide: createBooleanOption({
         description: 'Hide command output'
     })
@@ -37,34 +63,52 @@ const options = {
 export default class RollCommand extends Command {
     async run(ctx: CommandContext<typeof options>): Promise<void> {
         const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined
-
         const n = ctx.options.n;
         const sides = ctx.options.sides;
-        if ((n < MIN_LIMIT || n > MAX_LIMIT) || (sides < MIN_LIMIT || sides > MAX_LIMIT)) {
-            await ctx.write({ content: `Cannot roll those numbers.`, flags });
-            return;
-        }
+        const attribute = ctx.options.attribute;
+        const circumstances = ctx.options.circumstances;
 
-        const results = [];
+        const resultEmbed = new Embed();
+        const fields: APIEmbedField[] = [];
+
+        const rollValues = [];
         let total = 0;
 
         for (let i = 0; i < n; i++) {
             const value = this.roll(sides);
+            rollValues.push(value);
             total += value;
-            results.push(value);
         }
 
-        let content = `**Roll**: ${n}d${sides}`;
+        resultEmbed.setTitle(`Roll: ${n}d${sides}`);
+        resultEmbed.setColor(EMBED_COLOR);
 
         if (n > 1) {
-            content += ` (Total: ${total})`;
+            fields.push({ name: 'Total', value: `\`${total}\`` });
         }
 
-        content += '\n';
-        content += results.map(v => `:game_die: ${v}`).join(' ');
+        if (attribute) {
+            fields.push({ name: 'Attribute', value: `\`${attribute.toUpperCase()}\`` });
+        }
+
+        if (circumstances) {
+            let elem: number;
+            if (circumstances === 'Advantage') {
+                elem = Math.max(...rollValues);
+                fields.push({ name: 'Advantage', value: `\`${elem}\`` });
+            } else {
+                elem = Math.min(...rollValues);
+                fields.push({ name: 'Disadvantage', value: `\`${elem}\`` });
+            }
+        }
+
+        const diceStr = rollValues.map(v => `${v}`).join(', ');
+        fields.push({ name: ':game_die: Dice', value: `${diceStr}` });
+
+        resultEmbed.addFields(fields);
 
         await ctx.write({
-            content,
+            embeds: [resultEmbed],
             flags
         });
     }
