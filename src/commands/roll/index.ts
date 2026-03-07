@@ -16,7 +16,7 @@ const MIN_LIMIT = 1;
 const MAX_LIMIT = 100;
 
 const ATTRIBUTES_CHOICES = [
-    { name: 'Strength', value: 'strenth' },
+    { name: 'Strength', value: 'strength' },
     { name: 'Dexterity', value: 'dexterity' },
     { name: 'Constitution', value: 'constitution' },
     { name: 'Intelligence', value: 'intelligence' },
