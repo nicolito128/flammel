@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "npm run build && node --env-file .env  dist/index.js",
-    "build": "npm run clean && tsc --project tsconfig.json",
+    "build": "npm run clean && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "clean": "rm -rf dist"
   },
   "author": "Nicolas A. Serna",
@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.7.0",
+    "tsc-alias": "^1.8.17",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.4"
   }
 }

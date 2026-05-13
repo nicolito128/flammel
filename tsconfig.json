@@ -19,12 +19,18 @@
         "noErrorTruncation": true,
         "outDir": "./dist",
         "rootDir": "./src",
-        "stripInternal": true
+        "stripInternal": true,
+
+        "paths": {
+            "@/*": ["./src/*"],
+            "@lib/*": ["./src/lib/*"]
+        }
     },
     "exclude": [
         "node_modules"
     ],
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "src/**/*.ts"
     ]
 }

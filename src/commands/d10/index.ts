@@ -3,13 +3,13 @@ import {
 } from 'seyfert'
 import BaseDiceCommand from '@lib/dicecmd/index';
 
-const SIDES = 20;
+const SIDES = 10;
 
 @Declare({
-    name: 'd20',
-    description: 'Roll N dice with twenty sides each'
+    name: 'd10',
+    description: 'Roll N dice with ten sides each'
 })
-export default class D20 extends BaseDiceCommand {
+export default class D10 extends BaseDiceCommand {
     constructor() {
         super(SIDES);
     }
