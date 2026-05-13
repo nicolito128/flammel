@@ -10,19 +10,12 @@ import {
 } from 'seyfert'
 import { MessageFlags, APIEmbedField } from 'seyfert/lib/types'
 
+const SIDES = 20;
+
 const EMBED_COLOR = '#DC143C';
 
 const MIN_LIMIT = 1;
 const MAX_LIMIT = 100;
-
-const ATTRIBUTES_CHOICES = [
-    { name: 'Strength', value: 'strength' },
-    { name: 'Dexterity', value: 'dexterity' },
-    { name: 'Constitution', value: 'constitution' },
-    { name: 'Intelligence', value: 'intelligence' },
-    { name: 'Wisdom', value: 'wisdom' },
-    { name: 'Charisma', value: 'charisma' },
-];
 
 const CIRCUMSTANCES_CHOICES = [
     { name: 'Advantage', value: 'advantage' },
@@ -32,19 +25,8 @@ const CIRCUMSTANCES_CHOICES = [
 const options = {
     n: createNumberOption({
         description: 'Quantity of dice to roll',
-        required: true,
         min_value: MIN_LIMIT,
         max_value: MAX_LIMIT
-    }),
-    sides: createNumberOption({
-        description: 'Number of sides per die',
-        required: true,
-        min_value: MIN_LIMIT,
-        max_value: MAX_LIMIT
-    }),
-    attribute: createStringOption({
-        description: 'D&D ability type',
-        choices: ATTRIBUTES_CHOICES
     }),
     circumstances: createStringOption({
         description: 'Reflects the roll circumstances',
@@ -56,16 +38,14 @@ const options = {
 }
 
 @Declare({
-    name: 'roll',
-    description: 'Roll N dice with M sides each'
+    name: 'd20',
+    description: 'Roll N twenty-sided dice'
 })
 @Options(options)
-export default class RollCommand extends Command {
+export default class D20 extends Command {
     async run(ctx: CommandContext<typeof options>): Promise<void> {
         const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined
-        const n = ctx.options.n;
-        const sides = ctx.options.sides;
-        const attribute = ctx.options.attribute;
+        const n = ctx.options.n ?? 1;
         const circumstances = ctx.options.circumstances;
 
         const resultEmbed = new Embed();
@@ -75,20 +55,16 @@ export default class RollCommand extends Command {
         let total = 0;
 
         for (let i = 0; i < n; i++) {
-            const value = this.roll(sides);
+            const value = this.roll(SIDES);
             rollValues.push(value);
             total += value;
         }
 
-        resultEmbed.setTitle(`${n}d${sides}`);
+        resultEmbed.setTitle(`${n}d${SIDES}`);
         resultEmbed.setColor(EMBED_COLOR);
 
         if (n > 1) {
             fields.push({ name: 'Total', value: `\`${total}\`` });
-        }
-
-        if (attribute) {
-            fields.push({ name: 'Attribute', value: `\`${attribute.toUpperCase()}\`` });
         }
 
         if (circumstances) {

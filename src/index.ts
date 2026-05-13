@@ -1,4 +1,4 @@
-import Client from './lib/client/index'
+import Client from './lib/client'
 
 const client = new Client()
 
