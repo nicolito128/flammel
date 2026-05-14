@@ -1,0 +1,24 @@
+[Unit]
+Description=Flammel Discord Bot Service
+After=network-online.target
+
+[Container]
+# Local container image
+Image=flammel_bot:latest
+ContainerName=flammel-discord-bot
+
+# Load .env
+EnvironmentFile=%h/flammel/.env
+
+# Cmd: podman secret create flammel_bot_token ./secrets/bot_token
+Secret=flammel_bot_token,target=/run/secrets/bot_token
+
+# Mount volumes
+Volume=%h/flammel/seyfert-logs:/seyfert-logs:Z
+
+# Network
+Network=bridge
+User=node
+
+[Install]
+WantedBy=default.target
